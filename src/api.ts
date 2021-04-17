@@ -152,7 +152,7 @@ export default class Api {
       await promises.mkdir(filePath, { recursive: true });
     }
 
-    const writeStream = fs.createWriteStream(`${filePath}/${fileName}`);
+    const writeStream = fs.createWriteStream("${filePath}/${fileName}");
     const result: Promise<true> = new Promise((resolve, reject) => {
       writeStream.on("finish", () => resolve(true));
       writeStream.on("error", reject);
