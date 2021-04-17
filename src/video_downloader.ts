@@ -27,7 +27,7 @@ export default class VideoDownloader {
    */
   public async queueDownload(event: MotionEndEvent, retries = MAX_RETRIES): Promise<void> {
     if (retries <= 0) {
-      console.warn("Retries exhausted, not queuing download for event: %s", event);
+      console.info("Retries exhausted, not queuing download for event: %s", event);
       return;
     }
 
@@ -40,9 +40,9 @@ export default class VideoDownloader {
     try {
       await this.api.downloadVideo(event);
     } catch (error) {
-      console.warn("Download attempt failed for event: %s, retries: %s", event, retries);
+      console.info("Download attempt failed for event: %s, retries: %s", event, retries);
       if (error?.response) {
-        console.warn("Error details - status: %s, data: %s", error.response.status, error.response.data);
+        console.info("Error details - status: %s, data: %s", error.response.status, error.response.data);
       }
       throw new DownloadError(event, retries);
     }
